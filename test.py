@@ -12,8 +12,8 @@ def print_rels(aes):
         print_rels(ae.getAllRelatedElements())
 
 user = "user"
-pw = "password"
-auth = "USER=ds,PASSWORD=test,CREATE_COSESSION_ALLOWED=FALSE" % (user, pw)
+pw = "pass"
+auth = "USER=%s,PASSWORD=%s,CREATE_COSESSION_ALLOWED=FALSE" % (user, pw)
 
 orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
 
