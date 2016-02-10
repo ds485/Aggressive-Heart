@@ -11,7 +11,9 @@ def print_rels(aes):
         print "ae type: ", ae.getBaseElement().getType()
         print_rels(ae.getAllRelatedElements())
 
-auth = "USER=,PASSWORD=,CREATE_COSESSION_ALLOWED=FALSE"
+user = "user"
+pw = "password"
+auth = "USER=ds,PASSWORD=test,CREATE_COSESSION_ALLOWED=FALSE" % (user, pw)
 
 orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
 
@@ -20,7 +22,7 @@ obj = orb.string_to_object(ior)
 
 eo = obj._narrow(ods.AoFactory)
 if eo is None:
-    print "Object reference is not an Example::Echo"
+    print "Object reference is not an AoFactory"
     sys.exit(1)
 
 print "desc: ", eo.getDescription()
