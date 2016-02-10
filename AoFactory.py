@@ -14,6 +14,9 @@ class AoFactory_i (ods_POA.AoFactory):
     def __get_env(self):
         if self.env is None:
             self.env = self.db.AoEnvironment.find_one({"mime_type": 'application/x-asam.aoenvironment'})
+            if self.env is None:
+                # TODO: raise something
+                print "no env"
         return self.env
 
     def getDescription(self):
