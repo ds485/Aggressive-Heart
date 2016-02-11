@@ -3,6 +3,7 @@ __author__ = 'ds'
 import sys
 from omniORB import CORBA
 import org.asam.ods as ods
+import CosNaming
 
 
 def print_rels(aes):
@@ -17,10 +18,23 @@ auth = "USER=%s,PASSWORD=%s,CREATE_COSESSION_ALLOWED=FALSE" % (user, pw)
 
 orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
 
-ior = sys.argv[1]
-obj = orb.string_to_object(ior)
+# ior = sys.argv[1]
+obj = orb.resolve_initial_references("NameService")
+rootContext = obj._narrow(CosNaming.NamingContext)
+
+if rootContext is None:
+    print "Failed to narrow the root naming context"
+    sys.exit(1)
+
+name = [CosNaming.NameComponent("test", "my_context"), CosNaming.NameComponent("AoFactory", "Object")]
+try:
+    obj = rootContext.resolve(name)
+except CosNaming.NamingContext.NotFound, ex:
+    print "Name not found"
+    sys.exit(1)
 
 eo = obj._narrow(ods.AoFactory)
+
 if eo is None:
     print "Object reference is not an AoFactory"
     sys.exit(1)
