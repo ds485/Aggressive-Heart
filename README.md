@@ -8,10 +8,12 @@
     1. set user and pw in test.py
     2. run db init
         python ./initdb.py
-    3. run server (this prints the AoFactory IOR)
+    3. start omniNames
+        omniNames -datadir /tmp -start 2809
+    4. run server
         python ./code.py
-    4. run the test.py and at the AoFactory IOR as first arg
-        python ./test.py <IOR>
+    5. run the test.py
+        python ./test.py
 
 ## Help
     To create a custom application model simply edit the ApplicationModel.conf
