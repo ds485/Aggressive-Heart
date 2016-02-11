@@ -1,7 +1,7 @@
 # Aggressive-Heart
 
 ## install on fedora 23
-    dnf -y mongodb-server python-pymongo python-parse python-omniORB omniORB-devel
+    dnf -y mongodb-server python-pymongo python-parse python-omniORB omniORB-devel omniORB-servers
     systemctl start mongod
 
 ## test installation
